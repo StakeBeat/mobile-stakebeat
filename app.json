@@ -1,0 +1,12 @@
+{
+  "name": "mobile-stakebeat",
+  "displayName": "mobile-stakebeat",
+  "expo": {
+    "name": "mobile-stakebeat",
+    "slug": "mobile-stakebeat",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
