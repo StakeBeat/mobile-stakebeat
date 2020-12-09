@@ -12,7 +12,7 @@ import { theme } from '../core/theme'
 import { getValidators, addValidator, delValidator } from '../actions/validator'
 import { setAuthUser } from '../actions/user'
 import { digitValidator } from '../core/utils'
-import Logo from '../components/Logo'
+import NavBar from '../components/NavBar'
 
 
 class Validators extends Component {
@@ -95,16 +95,17 @@ class Validators extends Component {
       this.setState({ indexError })
     } else {
       this.setState({ indexError: '' })
-      this.setState({ search: '' })
       this.props.addValidator({ ...this.props.currentUser, ...{'index': this.state.index}} )
+      this.setState({ index: '' })
     }
   }
 
   render() {
     return (
       <Background>
-        <View style={{ ...theme.container, ...theme.hCenter}}>
-          <View style={{ ...theme.maxWidth, ...theme.flex }}>
+        <NavBar />
+        <View style={{ ...theme.container, ...theme.hCenter, flexDirection: 'column', justifyContent: 'space-around'}}>
+          <View style={{ ...theme.maxWidth }}>
             <View style={styles.description}>
               <Text h4 h4Style={{color: theme.colors.secondary, marginBottom: 20, fontSize: 20}}>ADD YOUR VALIDATOR</Text>
               <Text>Track your validators balance and performance over time and get alerted when your node is down or having issues.</Text>
@@ -138,7 +139,7 @@ class Validators extends Component {
             ) : <></>
           }
           {this.renderValidators()}
-          <View style={{...theme.flex, height: 80, marginTop: 40}}>
+          <View style={{height: 80, marginTop: 40}}>
             <TouchableOpacity onPress={() => Actions.home()}>
               <Text style={{ fontSize: 16, color: theme.colors.third }}>Get Started</Text>
             </TouchableOpacity>
@@ -151,18 +152,21 @@ class Validators extends Component {
 
 const styles = {
   inputBtnGroup: {
+    flexShrink:1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   description: {
+    flexShrink: 2,
     alignItems: 'center',
     textAlign: 'center',
     marginBottom: 50,
-    marginTop: 100,
+    marginTop: "10%",
   },
   validatorList: {
-    flex: 1,
+    flexGrow: 4,
+    flexShrink: 3,
     width: '100%',
     marginTop: 20,
     borderTopWidth: 1,
@@ -171,7 +175,6 @@ const styles = {
     borderBottomColor: theme.colors.primary,
   },
   swipeDel: {
-    flex: 1,
     height: '100%',
     alignItems: 'center',
     width: 75,

@@ -3,6 +3,7 @@ import Api, { VALIDATORS_URL } from '../api'
 export const GET_VALIDATORS = 'GET_VALIDATORS'
 export const ADD_VALIDATOR = 'ADD_VALIDATOR'
 export const DEL_VALIDATOR = 'DEL_VALIDATOR'
+export const VALIDATOR_INFO = 'VALIDATOR_INFO'
 
 export function getValidators(payload) {
   return (dispatch) => {
@@ -49,5 +50,21 @@ export function delValidator(payload) {
       .catch((err) => {
         console.log("error deleting validators: ", err)
       })
+  }
+}
+
+export function getValidatorInfo(accessToken) {
+  return (dispatch) => {
+    return Api.get(`${VALIDATORS_URL}/info`,
+      {Authorization: `JWT ${accessToken}`}
+    ).then((resp) => {
+      if (resp['data']['code'] == 200) {
+        dispatch({type: VALIDATOR_INFO, payload: resp['data']['validators']})
+      } else {
+        console.log('error fetching validator info')
+      }
+    }).catch((err) => {
+      console.log("error fetching validator info", err)
+    })
   }
 }

@@ -1,4 +1,10 @@
-import { GET_VALIDATORS, ADD_VALIDATOR, DEL_VALIDATOR } from '../actions/validator'
+import {
+  GET_VALIDATORS,
+  ADD_VALIDATOR,
+  DEL_VALIDATOR,
+  VALIDATOR_INFO,
+}
+from '../actions/validator'
 
 export function validatorsReducer(state = [], action) {
   switch (action.type) {
@@ -13,5 +19,25 @@ export function validatorsReducer(state = [], action) {
       ]
     default:
       return state
+  }
+}
+
+
+export function validatorInfoReducer(state = {}, action) {
+  switch (action.type) {
+    case VALIDATOR_INFO:
+      return action.payload
+    default:
+      return {
+        global: {
+          balance: '0',
+          rating: '?',
+          overtime: {
+            0: 0,
+          },
+        },
+        validators: {
+        }
+      }
   }
 }

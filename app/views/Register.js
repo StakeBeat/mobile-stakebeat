@@ -50,7 +50,7 @@ class Register extends Component {
     return (
       <Background>
         <View style={{ ...theme.container, ...theme.center, ...theme.maxWidth}}>
-          <Logo  style={styles.logo} />
+          <Logo  style={styles.logo} width={140} height={140} />
           <Input
             value={this.state.username}
             onChangeText={(username) => this.setState({ username })}
@@ -93,9 +93,9 @@ class Register extends Component {
             errorMessage={this.state.passwordError}
           />
           <Button
-            title='REGISTER'
+            title='Create an account'
             raised
-            containerStyle={{width:'100%', marginTop:20}}
+            containerStyle={{width:'100%', marginTop:10}}
             buttonStyle={styles.loginButton}
             onPress={this.onRegister.bind(this)}
           />
@@ -126,7 +126,7 @@ const styles = {
   },
   signIn: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 60,
   }
 }
 

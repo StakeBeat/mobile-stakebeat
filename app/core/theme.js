@@ -1,7 +1,9 @@
+import { maxAppWidth } from './size'
+
 export const theme = {
   colors: {
-    surface: '#221E38',
-    primary: '#0D0928',
+    surface: '#132137',
+    primary: '#213A62',
     secondary: '#F69842',
     third: '#F3C245',
     error: '#f13a59',
@@ -14,7 +16,7 @@ export const theme = {
   },
 
   flex: {
-
+    flex: 1,
   },
 
   hCenter: {
@@ -31,6 +33,6 @@ export const theme = {
   },
 
   maxWidth: {
-    width: 340,
+    width: maxAppWidth,
   }
 };

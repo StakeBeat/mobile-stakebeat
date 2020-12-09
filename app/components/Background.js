@@ -10,7 +10,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import { theme } from '../core/theme';
 
 const Background = ({ children }) => (
-  <LinearGradient colors={['#221e38', '#2d2d58', '#414180']} style={styles.background}>
+  <LinearGradient colors={[theme.colors.surface, theme.colors.primary, theme.colors.surface]} style={styles.background}>
     <KeyboardAvoidingView style={styles.container}>
       {children}
     </KeyboardAvoidingView>
