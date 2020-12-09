@@ -14,15 +14,17 @@ import { ThemeProvider } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { theme } from './core/theme'
+import reducers from './reducers/root_reducer'
+
 import Login from './views/Login';
 import Register from './views/Register';
 import Home from './views/Home';
 import ValidatorGetStarted from './views/ValidatorGetStarted';
 import ValidatorManage from './views/ValidatorManage';
-import Profile from './views/Profile';
-import Launch from './views/Launch';
-import reducers from './reducers/root_reducer'
-import { theme } from './core/theme'
+import Profile from './views/Profile'
+import Launch from './views/Launch'
+import NotificationGetStarted from './views/NotificationGetStarted'
 
 
 const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore)
@@ -88,6 +90,13 @@ class App extends Component {
                   key="validatorGetStarted"
                   component={ValidatorGetStarted}
                   title="ValidatorGetStarted"
+                  hideTabBar
+                  hideNavBar={true}
+                />
+                <Scene
+                  key="notificationGetStarted"
+                  component={NotificationGetStarted}
+                  title="notificationGetStarted"
                   hideTabBar
                   hideNavBar={true}
                 />

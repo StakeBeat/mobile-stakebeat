@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Tabs, Scene } from 'react-native-router-flux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View , SafeAreaView, ScrollView} from 'react-native'
-
-import { Text, ListItem, Badge } from 'react-native-elements'
+import { Text, ListItem, Badge, Icon, Tooltip } from 'react-native-elements'
 
 import { getValidatorInfo } from '../actions/validator'
 import { setAuthUser } from '../actions/user'
@@ -43,6 +42,68 @@ class Home extends Component {
     )
   }
 
+  renderBadgeByDistance(inclusionDistance) {
+    let badgeState = ''
+    if (inclusionDistance < 2) {
+      badgeState = 'success'
+    }
+    if (inclusionDistance >= 2 && inclusionDistance < 32) {
+      badgeState = 'warning'
+    }
+    if (inclusionDistance >= 32) {
+      badgeState = 'error'
+    }
+    if (inclusionDistance == '?') {
+      badgeState = 'primary'
+    }
+    return <Badge status={badgeState} />
+  }
+
+  renderPerformanceByDistance(inclusionDistance) {
+    if (inclusionDistance < 2) {
+      return (
+        <Tooltip popover={<Text>Doing great!</Text>}>
+          <Icon
+            name='smile'
+            type="feather"
+            color="green"
+          />
+        </Tooltip>
+      )
+    }
+    if (inclusionDistance >= 32) {
+      return (
+        <Tooltip popover={<Text>Might be offline</Text>}>
+          <Icon
+            name='zap-off'
+            type="red"
+            color="orange"
+          />
+        </Tooltip>
+      )
+    }
+    if (inclusionDistance == '?') {
+      return (
+        <Tooltip popover={<Text>Not activated</Text>}>
+          <Icon
+            name='clock'
+            type="feather"
+            color="white"
+          />
+        </Tooltip>
+      )
+    }
+    return (
+      <Tooltip popover={<Text>Doing poorly</Text>}>
+        <Icon
+          name='frown'
+          type="feather"
+          color="orange"
+        />
+      </Tooltip>
+    )
+  }
+
   renderTotalBalance() {
     return (
       <View style={styles.totalBalance}>
@@ -56,11 +117,11 @@ class Home extends Component {
         </View>
         <View style={styles.avgRatingView}>
           <Text style={styles.totalBalanceTitle}>
-            Avg Rating
+           Overall Perf.
           </Text>
-          <Text style={styles.avgRating}>
-            {this.props.info.global.rating}
-          </Text>
+          <View style={styles.avgRating}>
+            {this.renderPerformanceByDistance(this.props.info.global.rating)}
+          </View>
         </View>
       </View>
     )
@@ -77,15 +138,15 @@ class Home extends Component {
   renderSingleValidator(valIndex, validator) {
     return (
       <ListItem key={valIndex} containerStyle={{backgroundColor: 'none', borderBottomWidth: 1, borderBottomColor: theme.colors.primary}}>
-        <Badge
-          status="success"
-        />
+        {this.renderBadgeByDistance(validator.rating)}
         <ListItem.Content>
           <ListItem.Title style={{color: '#B5B5B5', fontSize: 14}}>Validator #{valIndex}</ListItem.Title>
           <ListItem.Subtitle style={{color: 'white', fontSize: 18}}><Ethereum width={15} height={15} />{validator.balance}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Content style={{ alignItems: 'flex-end' }}>
-            <Text style={{color: theme.colors.secondary, fontSize: 18}}>{validator.rating}</Text>
+            <Text style={{color: theme.colors.secondary, fontSize: 18}}>
+              {this.renderPerformanceByDistance(validator.rating)}
+            </Text>
         </ListItem.Content>
       </ListItem>
     )
@@ -130,8 +191,10 @@ const styles = {
     paddingLeft: 10,
   },
   avgRating: {
+    width: '100%',
     color: theme.colors.secondary,
-    fontSize: 24,
+    paddingTop: 5,
+    justifyContent: 'center',
   },
   balanceGraph: {
     marginTop: 20,

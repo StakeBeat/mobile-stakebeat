@@ -9,8 +9,8 @@ import Logo from '../components/Logo'
 class Launch extends Component {
   render() {
     return (
-      <Background>
-        <Logo />
+      <Background style={{...theme.container, ...theme.center}}>
+        <Logo width={140} height={140} />
       </Background>
     )
   }

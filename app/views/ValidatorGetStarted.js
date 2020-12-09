@@ -28,7 +28,7 @@ class ValidatorGetStarted extends Component {
           <View style={{height: 60, marginTop: 30}}>
 
             <TouchableOpacity onPress={() => Actions.home()}>
-              <Text style={{ fontSize: 16, color: theme.colors.third }}>Get Started</Text>
+              <Text style={{ fontSize: 16, color: theme.colors.third }}>Set up notifications </Text>
             </TouchableOpacity>
           </View>
         </View>
