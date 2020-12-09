@@ -38,7 +38,7 @@ class Register extends Component {
       this.props.register({ username: this.state.username, password: this.state.password })
         .then((isLogged) => {
           if (isLogged) {
-            Actions.home()
+            Actions.validatorGetStarted()
           } else {
             this.setState({usernameError: 'User Registration failed.'})
           }

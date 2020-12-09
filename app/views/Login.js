@@ -77,9 +77,6 @@ class Login extends Component {
             buttonStyle={styles.loginButton}
             onPress={this.onLogin.bind(this)}
           />
-          <Text style={styles.forgotPw}>
-            Forgot Password?
-          </Text>
           <TouchableOpacity onPress={() => Actions.register()} style={styles.register}>
             <Text h4 h4Style={{fontSize: 16}}>
                 Register a new account
